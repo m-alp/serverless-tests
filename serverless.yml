@@ -27,3 +27,6 @@ resources:
                 ProvisionedThroughput:
                     ReadCapacityUnits: 1
                     WriteCapacityUnits: 1
+                # DynamoDB Stream enabled -> New and old images; triggers are defined in functions spec
+                StreamSpecification:
+                    StreamViewType: NEW_AND_OLD_IMAGES
