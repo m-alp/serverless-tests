@@ -1,0 +1,35 @@
+service: serverless-tests
+
+provider:
+    name: aws
+    stage: dev # Default stage
+    region: eu-central-1 # Frankfurt
+
+functions:
+    readFunc: # function 1
+        handler: read.func
+
+# resources that functions use
+resources:
+    # this is Cloud Formation
+    Resources:
+        demoTable:
+            Type: AWS:DynamoDB::Table
+            Properties:
+                TableName: my-table
+                AttributeDefinitions:
+                    - AttributeName: id
+                      AttributeType: N
+                    - AttributeName: name
+                      AttributeType: S
+                    - AttributeName: email
+                      AttributeType: S
+                KeySchema:
+                    - AttributeName: id
+                      AttributeType: RANGE
+                    - AttributeName: email
+                      KeyType: HASH
+                ProvisionedThroughput:
+                    ReadCapacityUnits: 1
+                    WriteCapacityUnits: 1
+
