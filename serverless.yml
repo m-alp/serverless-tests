@@ -4,6 +4,7 @@ provider:
     name: aws
     stage: dev # Default stage
     region: eu-central-1 # Frankfurt
+    runtime: go1.x
 
 functions:
     readFunc: # function 1
