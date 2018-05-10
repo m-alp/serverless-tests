@@ -5,10 +5,20 @@ provider:
     stage: dev # Default stage
     region: eu-central-1 # Frankfurt
     runtime: go1.x
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+              - dynamodb:DescribeStream
+              - dynamodb:GetRecords
+              - dynamodb:GetShardIterator
+              - dynamodb:ListStreams
+          Resource: arn:aws:dynamodb:*:*:table/my-table
 
 functions:
     readFunc: # function 1
         handler: read.func
+        events:
+            - stream: arn:aws:dynamodb:eu-central-1:757691043963:table/my-table/stream/2018-05-10T16:34:23.265
 
 # resources that functions use
 resources:
@@ -26,7 +36,7 @@ resources:
                     - AttributeName: email
                       KeyType: HASH # HASH or RANGE
                 ProvisionedThroughput:
-                    ReadCapacityUnits: 1
+                    ReadCapacityUnits: 1 # number of columns ?
                     WriteCapacityUnits: 1
                 # DynamoDB Stream enabled -> New and old images; triggers are defined in functions spec
                 StreamSpecification:
