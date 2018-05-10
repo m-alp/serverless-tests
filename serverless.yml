@@ -18,7 +18,12 @@ functions:
     readFunc: # function 1
         handler: read.func
         events:
-            - stream: arn:aws:dynamodb:eu-central-1:757691043963:table/my-table/stream/2018-05-10T16:34:23.265
+            - stream:
+                type: dynamodb
+                arn:
+                  Fn::GetAtt:
+                        - demoTable
+                        - StreamArn
 
 # resources that functions use
 resources:
