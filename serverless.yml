@@ -18,18 +18,12 @@ resources:
             Properties:
                 TableName: my-table
                 AttributeDefinitions:
-                    - AttributeName: id
-                      AttributeType: N
-                    - AttributeName: name
-                      AttributeType: S
+                    # only one property. More columns will be added when items are added
                     - AttributeName: email
-                      AttributeType: S
+                      AttributeType: S # S(tring) or N(umber) or B(inary)
                 KeySchema:
-                    - AttributeName: id
-                      AttributeType: RANGE
                     - AttributeName: email
-                      KeyType: HASH
+                      KeyType: HASH # HASH or RANGE
                 ProvisionedThroughput:
                     ReadCapacityUnits: 1
                     WriteCapacityUnits: 1
-
