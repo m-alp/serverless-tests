@@ -14,7 +14,7 @@ resources:
     # this is Cloud Formation
     Resources:
         demoTable:
-            Type: AWS:DynamoDB::Table
+            Type: AWS::DynamoDB::Table
             Properties:
                 TableName: my-table
                 AttributeDefinitions:
